@@ -1,0 +1,116 @@
+{% load static widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Form</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4; /* Light gray background */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 40px auto;
+            background-color: #ffbaeb; /* Light purple background for the form */
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            position: relative; /* Ensure that dropdowns are displayed correctly */
+        }
+        h2 {
+            font-family: 'Georgia', serif;
+            color: #003366; /* Deep blue color for the heading */
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #333;
+            box-sizing: border-box; /* Ensure padding is included in the width */
+        }
+        input[type="radio"] {
+            margin-right: 8px;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column; /* Arrange radio buttons vertically */
+            gap: 10px; /* Space between radio buttons */
+        }
+        button {
+            background-color: #003366; /* Deep blue color for the button */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+        }
+        button:hover {
+            background-color: #002244; /* Darker blue for button hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hotel Booking Form</h2>
+        <form method="post" action="{% url 'submit_booking' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                {{ form.contact_number.label_tag }}
+                {{ form.contact_number }}
+            </div>
+            <div class="form-group">
+                {{ form.check_in.label_tag }}
+                {{ form.check_in|attr:"type=date" }}
+            </div>
+            <div class="form-group">
+                {{ form.check_out.label_tag }}
+                {{ form.check_out|attr:"type=date" }}
+            </div>
+            <div class="form-group">
+                {{ form.room_type.label_tag }}
+                {{ form.room_type }}
+            </div>
+            <div class="form-group">
+                {{ form.room_preference.label_tag }}
+                {{ form.room_preference }}
+            </div>
+            <div class="form-group">
+                {{ form.special_requests.label_tag }}
+                {{ form.special_requests }}
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
